@@ -15,11 +15,13 @@ let messageEl = document.querySelector('#message')
 
 /*----------------------------- Event Listeners -----------------------------*/
 //app should wait for the user to click a square and call a handleClick function
-//squares.addEventListener('click', 'div', handleClick)//evt? make forEach funtion
-
-handleClick('click', 'div', evt => { 
-  console.log('hi')
+squares.forEach(function(square) {
+    square.addEventListener('click', handleClick)
 })
+
+// handleClick('click', 'div', evt => { 
+  //console.log(squares.id)
+// })
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -76,16 +78,16 @@ function render() {
 
 
 //Next, the app should wait for the user to click a square and call a handleClick function
-function handleClick(type, selector, callback) {
+function handleClick() {//(type, selector, callback) {
   //obtain the index of the square that was clicked by :
     //extracting" the index from an id assigned to the element in the HTML
       // Hint: Each id seems to correspond with an index in our board array. How could these be used if we cleaned them up a bit?
 
       //let squareId = squares.id 
 
-      document.addEventListener(type,evt => {
-        if(evt.target.matches(selector)) callback(evt)
-      })
+      // document.addEventListener(type,evt => {
+      //   if(evt.target.matches(selector)) console.dir(selector.id)//callback(evt)
+      // })
   
     //If the board has a value at the index, immediately return because that square is already taken
 
