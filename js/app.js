@@ -5,7 +5,7 @@ const winningCombos = []
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let boardArr, turn, winner
+let boardArr = [], turn, winner
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -22,19 +22,48 @@ init()
 //initialize function should initialize the state variables
 function init() {
     //Initialize the board array to 9 nulls to represent empty squares
-
+    for (let i = 0; i < 9; i++) {
+        boardArr[i] = null
+    } //may need to MAP instead or MAP later!!!!!!!!!!
 
     //Initialize whose turn it is to 1 (player 'X')
-
+    turn = 1
     //Initialize the winner variable to null
-
+    winner = null
     //Render those state variables to the page by calling a render function
+    render()
 }
 
 function render() {
-  //Loop over the board array (which represents the squares on the page)
+  //Loop over the board array (which represents the squares on the page) for each iteration:
+    boardArr.forEach((square, index) => {
+    //Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
+    //Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)  
+      
+      let mark
 
+        if(square === 1){
+          mark = `X`
+        } else if (square === -1) {
+          mark = `O`
+        } else {
+          mark = null
+        }
+    })
+    
   //Render a message reflecting the current game state:
+    //If winner has a value other than null (game still in progress), render whose turn it is
+    //If winner is equal to 'T' (tie), render a tie message
+    //Otherwise, render a congratulatory message to which player has won
+    
+    if (winner !== null) {
+      return `Game still in progress`
+    } else if (winner === `T`) {
+      return `tie`
+    } else {
+      return `Congratulations! You have won!`
+    }
+    
 
   //call handleClick function?
 }
@@ -72,3 +101,4 @@ function getWinner() {
   //all state has been updated, so render the state to the page (step 3.3).
 }
 
+//dont forget the replay button!!
