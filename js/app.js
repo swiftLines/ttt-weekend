@@ -14,8 +14,12 @@ let messageEl = document.querySelector('#message')
 //Store the element that displays the game status on the page
 
 /*----------------------------- Event Listeners -----------------------------*/
+//app should wait for the user to click a square and call a handleClick function
+//squares.addEventListener('click', 'div', handleClick)//evt? make forEach funtion
 
-
+handleClick('click', 'div', evt => { 
+  console.log('hi')
+})
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -72,18 +76,26 @@ function render() {
 
 
 //Next, the app should wait for the user to click a square and call a handleClick function
-function handleClick() {
-  //obtain the index of the square that was clicked
+function handleClick(type, selector, callback) {
+  //obtain the index of the square that was clicked by :
+    //extracting" the index from an id assigned to the element in the HTML
+      // Hint: Each id seems to correspond with an index in our board array. How could these be used if we cleaned them up a bit?
 
-  //If the board has a value at the index, immediately return because that square is already taken
+      //let squareId = squares.id 
 
-  //If winner is not null, immediately return because the game is over
+      document.addEventListener(type,evt => {
+        if(evt.target.matches(selector)) callback(evt)
+      })
   
-  //Update the board array at the index with the value of turn
+    //If the board has a value at the index, immediately return because that square is already taken
 
-  //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
+    //If winner is not null, immediately return because the game is over
+  
+    //Update the board array at the index with the value of turn
 
-  //Set the winner variable if there's a winner by calling a new function: getWinner
+    //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
+
+    //Set the winner variable if there's a winner by calling a new function: getWinner
 
 
 }
