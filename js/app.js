@@ -78,27 +78,32 @@ function render() {
 
 
 //Next, the app should wait for the user to click a square and call a handleClick function
-function handleClick() {//(type, selector, callback) {
+function handleClick(evt) {//(type, selector, callback) {
   //obtain the index of the square that was clicked by :
     //extracting" the index from an id assigned to the element in the HTML
       // Hint: Each id seems to correspond with an index in our board array. How could these be used if we cleaned them up a bit?
 
-      //let squareId = squares.id 
+    let squareId = parseInt(evt.target.id)
+  //console.log(squareId) 
 
       // document.addEventListener(type,evt => {
       //   if(evt.target.matches(selector)) console.dir(selector.id)//callback(evt)
       // })
   
     //If the board has a value at the index, immediately return because that square is already taken
-
     //If winner is not null, immediately return because the game is over
+    if (boardArr[squareId]) {
+      return `Square is already taken...`
+    } else if (winner !== null) {
+      return `Game is over...`
+    }
   
     //Update the board array at the index with the value of turn
-
+    boardArr[squareId] = turn
     //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
-
+    turn *= -1
     //Set the winner variable if there's a winner by calling a new function: getWinner
-
+    winner = getWinner()
 
 }
 
