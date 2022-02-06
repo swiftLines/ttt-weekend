@@ -25,6 +25,7 @@ function init() {
     for (let i = 0; i < 9; i++) {
         boardArr[i] = null
     } //may need to MAP instead or MAP later!!!!!!!!!!
+    //boardArr[1]= -1 // TEST Success!
 
     //Initialize whose turn it is to 1 (player 'X')
     turn = 1
@@ -49,25 +50,26 @@ function render() {
         } else {
           mark = null
         }
+        
+        squares[index].innerText = mark
     })
     
   //Render a message reflecting the current game state:
     //If winner has a value other than null (game still in progress), render whose turn it is
     //If winner is equal to 'T' (tie), render a tie message
     //Otherwise, render a congratulatory message to which player has won
-    
-    if (winner !== null) {
-      return `Game still in progress`
-    } else if (winner === `T`) {
-      return `tie`
-    } else {
-      return `Congratulations! You have won!`
-    }
-    
 
-  //call handleClick function?
+    if (winner !== null) {
+      messageEl.innerText = `Game still in progress`
+    } else if (winner === `T`) {
+      messageEl.innerText =  `tie`
+    } else {
+      messageEl.innerText =  `Congratulations! You have won!`
+    }
+    //After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page
+    
 }
-//After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page
+
 
 //Next, the app should wait for the user to click a square and call a handleClick function
 function handleClick() {
