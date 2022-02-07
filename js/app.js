@@ -1,7 +1,16 @@
 /*-------------------------------- Constants --------------------------------*/
 //Define the 8 possible winning combinations as an array of arrays.
 // Each array will contain three indexes of the board that make a winner if they hold the same player value
-const winningCombos = []
+const winningCombos = [
+  [0, 3, 6],
+  [0, 4, 8],
+  [0, 1, 2],
+  [1, 4, 7],
+  [2, 4, 6],
+  [2, 5, 8],
+  [3, 4, 5],
+  [6, 7, 8]
+]
 
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -19,7 +28,7 @@ squares.forEach(function(square) {
     square.addEventListener('click', handleClick)
 })
 
-// handleClick('click', 'div', evt => { 
+//s handleClick('click', 'div', evt => { 
   //console.log(squares.id)
 // })
 
@@ -65,11 +74,11 @@ function render() {
     //If winner is equal to 'T' (tie), render a tie message
     //Otherwise, render a congratulatory message to which player has won
 
-    if (winner !== null) {
+    if (winner === null) {
       messageEl.innerText = `Game still in progress`
     } else if (winner === `T`) {
       messageEl.innerText =  `tie`
-    } else {
+    } else if (winner !== null) {
       messageEl.innerText =  `Congratulations! You have won!`
     }
     //After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page
@@ -93,9 +102,9 @@ function handleClick(evt) {//(type, selector, callback) {
     //If the board has a value at the index, immediately return because that square is already taken
     //If winner is not null, immediately return because the game is over
     if (boardArr[squareId]) {
-      return `Square is already taken...`
+      messageEl.innerText = `Square is already taken...`
     } else if (winner !== null) {
-      return `Game is over...`
+      messageEl.innerText = `Game is over...`
     }
   
     //Update the board array at the index with the value of turn
@@ -105,21 +114,32 @@ function handleClick(evt) {//(type, selector, callback) {
     //Set the winner variable if there's a winner by calling a new function: getWinner
     winner = getWinner()
 
+    render()
 }
 
+//check for winner
 function getWinner() {
-  //check for winner
-  //Loop through the each of the winning combination arrays defined
-  //Total up the three board positions using the three indexes in the current combo
-  //Convert the total to an absolute value (convert any negative total to positive)
-  //If the total equals 3, we have a winner! Set the winner variable to the board's value at the index specified by the first index of that winning combination's array by returning that value
+  // 1) Loop through the each of the winning combination arrays defined
+  winningCombos.forEach(function(arr) {
+      if (Math.abs(boardArr[arr[0]] + boardArr[arr[1]] + boardArr[arr[2]] === 3)) {
+        console.log(`It works!!!`)
+        return boardArr[arr[0]]
+      }
+  })
+  // 2) Total up the three board positions using the three indexes in the current combo
+  // 3) Convert the total to an absolute value (convert any negative total to positive)
+  // 4) If the total equals 3, we have a winner! Set the winner variable to the board's value at the index specified by the first index of that winning combination's array by returning that value
   
   //Next, If there's no winner, check if there's a tie
   //Set the winner varible to "T" if there are no more nulls in the board array by returning the string "T"
-
   //Otherwise return null.
-
+  if (boardArr.includes(null)) {
+    return null
+  } else {
+    return "T"
+  }
   //all state has been updated, so render the state to the page (step 3.3).
+  render()
 }
 
 //dont forget the replay button!!
