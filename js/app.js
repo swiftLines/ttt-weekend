@@ -48,11 +48,11 @@ function init() {
     winner = null
     //Render those state variables to the page by calling a render function
     render()
-}
+}//end init()
 
 function render() {
   //Loop over the board array (which represents the squares on the page) for each iteration:
-    boardArr.forEach((square, index) => {
+    boardArr.forEach(function (square, index) {
     //Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
     //Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)  
       
@@ -67,7 +67,7 @@ function render() {
         }
         
         squares[index].innerText = mark
-    })
+    })//end boardArr.forEach
     
   //Render a message reflecting the current game state:
     //If winner has a value other than null (game still in progress), render whose turn it is
@@ -76,14 +76,23 @@ function render() {
 
     if (winner === null) {
       messageEl.innerText = `Game still in progress`
+      if(turn === 1) {
+        `Player X's turn`
+      } else {
+        `Player O's turn`
+      }
     } else if (winner === `T`) {
-      messageEl.innerText =  `tie`
+      messageEl.innerText =  `Cat's Game (Tie)`
     } else if (winner !== null) {
-      messageEl.innerText =  `Congratulations! You have won!`
-    }
-    //After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page
+      messageEl.innerText =  `Congratulations! Player `
+      if(turn === 1) {
+        `X wins!`
+      } else {
+        `O wins!`
+      }
+    }//end if
     
-}
+}//end render()
 
 
 //Next, the app should wait for the user to click a square and call a handleClick function
@@ -103,8 +112,10 @@ function handleClick(evt) {//(type, selector, callback) {
     //If winner is not null, immediately return because the game is over
     if (boardArr[squareId]) {
       messageEl.innerText = `Square is already taken...`
+      return
     } else if (winner !== null) {
       messageEl.innerText = `Game is over...`
+      return
     }
   
     //Update the board array at the index with the value of turn
@@ -115,7 +126,7 @@ function handleClick(evt) {//(type, selector, callback) {
     winner = getWinner()
 
     render()
-}
+}//end handleClick()
 
 //check for winner
 function getWinner() {
@@ -138,8 +149,5 @@ function getWinner() {
   } else {
     return "T"
   }
-  //all state has been updated, so render the state to the page (step 3.3).
-  render()
-}
-
-//dont forget the replay button!!
+  
+}// end getWinner()
