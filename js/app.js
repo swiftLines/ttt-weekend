@@ -1,6 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
 //Define the 8 possible winning combinations as an array of arrays.
-// Each array will contain three indexes of the board that make a winner if they hold the same player value
 const winningCombos = [
   [0, 3, 6],
   [0, 4, 8],
@@ -14,8 +13,6 @@ const winningCombos = [
 
 /*---------------------------- Variables (state) ----------------------------*/
 let boardArr = [], turn, winner
-
-//body.style.textAlign = 'center'
 
 /*------------------------ Cached Element References ------------------------*/
 const squares = document.querySelectorAll('div')
@@ -52,10 +49,7 @@ function init() {
 
 function render() {
   //Loop over the board array (which represents the squares on the page) for each iteration:
-    boardArr.forEach(function (square, index) {
-    //Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
-    //Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)  
-      
+    boardArr.forEach(function (square, index) {      
       let mark
 
         if(square === 1){
@@ -70,9 +64,6 @@ function render() {
     })//end boardArr.forEach
     
   //Render a message reflecting the current game state:
-    //If winner has a value other than null (game still in progress), render whose turn it is
-    //If winner is equal to 'T' (tie), render a tie message
-    //Otherwise, render a congratulatory message to which player has won
     let message
 
     if (winner === null) {
@@ -100,8 +91,7 @@ function render() {
 
 //Next, the app should wait for the user to click a square and call a handleClick function
 function handleClick(evt) {//(type, selector, callback) {
-  //obtain the index of the square that was clicked by :
-    //extracting" the index from an id assigned to the element in the HTML
+  //obtain the index of the square that was clicked 
 
     let squareId = parseInt(evt.target.id)
     if(winner !== null) {
@@ -111,8 +101,6 @@ function handleClick(evt) {//(type, selector, callback) {
       //   if(evt.target.matches(selector)) console.dir(selector.id)//callback(evt)
       // })
   
-    //If the board has a value at the index, immediately return because that square is already taken
-    //If winner is not null, immediately return because the game is over
     if (boardArr[squareId]) {
       messageEl.innerText = `Square is already taken...`
       return
@@ -123,22 +111,17 @@ function handleClick(evt) {//(type, selector, callback) {
   
     //Update the board array at the index with the value of turn
     boardArr[squareId] = turn
-    //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
-    winner = getWinner()
-
-    turn *= -1
     //Set the winner variable if there's a winner by calling a new function: getWinner
-   
-
+    winner = getWinner()
+    //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
+    turn *= -1
+    
     render()
 }//end handleClick()
 
 //check for winner
 function getWinner() {
-  // 1) Loop through the each of the winning combination arrays defined
-  // 2) Total up the three board positions using the three indexes in the current combo
-  // 3) Convert the total to an absolute value (convert any negative total to positive)
-  // 4) If the total equals 3, we have a winner! Set the winner variable to the board's value at the index specified by the first index of that winning combination's array by returning that value
+ 
   let winner = null
   winningCombos.forEach(function(arr) {
     let myVar = Math.abs(boardArr[arr[0]] + boardArr[arr[1]] + boardArr[arr[2]])
@@ -153,8 +136,6 @@ function getWinner() {
       return winner
     }
   //Next, If there's no winner, check if there's a tie
-  //Set the winner varible to "T" if there are no more nulls in the board array by returning the string "T"
-  //Otherwise return null.
   if (boardArr.includes(null)) {
     return null
   } else {
