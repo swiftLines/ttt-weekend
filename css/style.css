@@ -23,3 +23,9 @@ div {
   text-align: center;
   vertical-align: middle;
 }
+
+button {
+  background-color: #0098FA;
+  border: none;
+  color: #77FAC6
+}

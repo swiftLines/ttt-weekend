@@ -39,6 +39,10 @@ function init() {
     for (let i = 0; i < 9; i++) {
         boardArr[i] = null
     } 
+    //Initial message
+    // messageEl.innerText = `Click a Square to Start`
+    //Replay button style
+    //
     //Initialize whose turn it is to 1 (player 'X')
     turn = 1
     //Initialize the winner variable to null
