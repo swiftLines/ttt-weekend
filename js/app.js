@@ -87,7 +87,7 @@ function render() {
       messageEl.innerText =  `Cat's Game (Tie)`
     } else if (winner !== null) {
       
-      if(turn === 1) {
+      if(winner === 1) {
         message = `X wins`
       } else {
         message = `O wins`
@@ -104,7 +104,9 @@ function handleClick(evt) {//(type, selector, callback) {
     //extracting" the index from an id assigned to the element in the HTML
 
     let squareId = parseInt(evt.target.id)
-
+    if(winner !== null) {
+      return
+    }
       // document.addEventListener(type,evt => {
       //   if(evt.target.matches(selector)) console.dir(selector.id)//callback(evt)
       // })
@@ -122,9 +124,11 @@ function handleClick(evt) {//(type, selector, callback) {
     //Update the board array at the index with the value of turn
     boardArr[squareId] = turn
     //Change the turn by multiplying turn by -1 (this flips a 1 to -1, and vice-versa)
+    winner = getWinner()
+
     turn *= -1
     //Set the winner variable if there's a winner by calling a new function: getWinner
-    winner = getWinner()
+   
 
     render()
 }//end handleClick()
@@ -135,13 +139,19 @@ function getWinner() {
   // 2) Total up the three board positions using the three indexes in the current combo
   // 3) Convert the total to an absolute value (convert any negative total to positive)
   // 4) If the total equals 3, we have a winner! Set the winner variable to the board's value at the index specified by the first index of that winning combination's array by returning that value
+  let winner = null
   winningCombos.forEach(function(arr) {
-      if (Math.abs(boardArr[arr[0]] + boardArr[arr[1]] + boardArr[arr[2]] === 3)) {
+    let myVar = Math.abs(boardArr[arr[0]] + boardArr[arr[1]] + boardArr[arr[2]])
+    console.log()
+      if (myVar === 3){
         console.log(`It works!!!`)
-        return boardArr[arr[0]]
+        winner = turn
+        return
       }
   })
-  
+    if(winner !== null) {
+      return winner
+    }
   //Next, If there's no winner, check if there's a tie
   //Set the winner varible to "T" if there are no more nulls in the board array by returning the string "T"
   //Otherwise return null.
