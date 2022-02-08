@@ -22,10 +22,19 @@ div {
   font-size: 8vmin;
   text-align: center;
   vertical-align: middle;
+  background-color: #F9F871;
 }
 
 button {
   background-color: #0098FA;
   border-color: #EA0CE4;
   color: #77FAC6
+}
+
+h1 {
+  color: #1CEE51
+}
+
+h2 {
+  color: #D837FF;
 }
